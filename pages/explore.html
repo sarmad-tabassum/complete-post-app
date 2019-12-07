@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Explore | Postify</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="explore.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-left">
+        <a href="dashboard.html" class="nav-logo">
+          <i class="fas fa-bolt"></i> Postify
+        </a>
+        <ul class="nav-links">
+          <li>
+            <a href="./dashboard.html"
+              ><i class="fas fa-home"></i> <span>Home</span></a
+            >
+          </li>
+          <li>
+            <a href="./explore.html" class="active"
+              ><i class="fas fa-compass"></i> <span>Explore</span></a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <div class="nav-right">
+        <div class="profile-trigger">
+          <img
+            id="userAvatar"
+            src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+            class="nav-avatar"
+            alt="User Avatar"
+          />
+          <i class="fas fa-chevron-down"></i>
+        </div>
+
+        <div class="profile-dropdown">
+          <div class="dropdown-user-info">
+            <h4 id="userName-hed">Loading User...</h4>
+            <p id="userEmail">Loading email...</p>
+          </div>
+          <button id="edit-profile-btn" class="dropdown-menu-item">
+            <i class="fas fa-user-edit"></i> Edit Profile
+          </button>
+          <button id="logout" class="dropdown-menu-item logout-action">
+            <i class="fas fa-sign-out-alt"></i> Logout Session
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <div id="loader">
+      <div class="spinner"></div>
+      <p>Loading...</p>
+    </div>
+
+    <div class="explore-layout">
+      <div class="explore-banner">
+        <video autoplay loop muted playsinline class="banner-video">
+          <source src="https://vjs.zencdn.net/v/oceans.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+
+        <div class="banner-content-wrapper">
+          <div class="banner-text">
+            <span class="banner-tag"
+              ><i class="fas fa-bolt"> </i> POSTIFY COMMUNITY
+            </span>
+            <h1>Share Ideas.<br />Inspire People.</h1>
+            <p>
+              Discover inspiring stories, connect with creators, and explore
+              conversations from people around the world.
+            </p>
+            <div class="banner-btns">
+              <button class="explore-btn">Explore Posts</button>
+              <button class="community-btn">Join Community</button>
+            </div>
+          </div>
+
+          <div class="banner-stats">
+            <div class="stat-card">
+              <h2>25K+</h2>
+              <span>Posts Shared</span>
+            </div>
+            <div class="stat-card">
+              <h2>10K+</h2>
+              <span>Members</span>
+            </div>
+            <div class="stat-card">
+              <h2>120+</h2>
+              <span>Countries</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="main-grid-container">
+        <main class="feed-column" id="exploreGlobalContainer"></main>
+
+        <aside class="sidebar-column">
+          <div class="sidebar-widget">
+            <h3 class="widget-title">
+              <i class="fas fa-fire"></i> Trending Topics
+            </h3>
+            <ul class="trending-list">
+              <li>
+                <a href="#">#WebDevelopment</a>
+                <span>1.2k posts</span>
+              </li>
+              <li>
+                <a href="#">#SupabaseAuth</a>
+                <span>840 posts</span>
+              </li>
+              <li>
+                <a href="#">#UIUXDesign</a>
+                <span>520 posts</span>
+              </li>
+              <li>
+                <a href="#">#JavaScriptTips</a>
+                <span>310 posts</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="sidebar-widget">
+            <h3 class="widget-title">
+              <i class="fas fa-user-plus"></i> Top Creators
+            </h3>
+            <div class="creator-suggest">
+              <div class="creator-item">
+                <div class="mini-avatar">JD</div>
+                <div class="creator-info">
+                  <h5>John Doe</h5>
+                  <span>@johndoe</span>
+                </div>
+                <button class="follow-btn">Follow</button>
+              </div>
+              <div class="creator-item">
+                <div class="mini-avatar" style="background: #10b981">AS</div>
+                <div class="creator-info">
+                  <h5>Ayesha Shah</h5>
+                  <span>@ayesha_s</span>
+                </div>
+                <button class="follow-btn">Follow</button>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="module" src="explore.js"></script>
+  </body>
+</html>

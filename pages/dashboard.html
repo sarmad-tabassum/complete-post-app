@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard | Postify</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="dashboard.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-left">
+        <a href="dashboard.html" class="nav-logo">
+          <i class="fas fa-bolt"></i> Postify
+        </a>
+        <ul class="nav-links">
+          <li>
+            <a href="./dashboard.html" class="active"
+              ><i class="fas fa-home"></i> <span>Home</span></a
+            >
+          </li>
+          <li>
+            <a href="./explore.html"
+              ><i class="fas fa-compass"></i> <span>Explore</span></a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <div class="nav-right">
+        <div class="profile-trigger">
+          <img
+            id="userAvatar"
+            src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+            class="nav-avatar"
+            alt="User Avatar"
+          />
+          <i class="fas fa-chevron-down"></i>
+        </div>
+
+        <div class="profile-dropdown">
+          <div class="dropdown-user-info">
+            <h4 id="userName-hed">Loading User...</h4>
+            <p id="userEmail">Loading email...</p>
+          </div>
+          <button id="edit-profile-btn" class="dropdown-menu-item">
+            <i class="fas fa-user-edit"></i> Edit Profile
+          </button>
+          <button id="logout" class="dropdown-menu-item logout-action">
+            <i class="fas fa-sign-out-alt"></i> Logout Session
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <div class="dashboard-grid">
+      <aside class="sidebar-left">
+        <div class="user-stats-card">
+          <div class="user-stats-card">
+            <div class="stats-profile-cover">
+              <video autoplay loop muted playsinline class="cover-bg-video">
+                <source
+                  src="https://videos.pexels.com/video-files/3045163/3045163-hd_1920_1080_25fps.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <div class="cover-overlay"></div>
+            </div>
+
+            <div class="stats-profile-info">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                id="statsAvatarSync"
+                class="stats-avatar"
+                alt="User Avatar"
+              />
+              <h3 id="statsNameSync">Loading Name...</h3>
+              <p id="statsEmailSync">loading@email.com</p>
+            </div>
+            <div class="stats-counter-divider"></div>
+            <div class="stats-row">
+              <div class="stat-item">
+                <span class="stat-count" id="totalPostsCount">0</span>
+                <span class="stat-label">Total Stories</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="create-post-card">
+          <div class="creator-header-row">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+              class="creator-avatar"
+              id="creatorAvatarSync"
+              alt="Creator Avatar"
+            />
+            <span class="creator-title-text">Create New Story</span>
+          </div>
+          <div class="input-wrapper">
+            <input
+              type="text"
+              id="postTitle"
+              class="post-title-inp"
+              placeholder="Story Title..."
+            />
+            <textarea
+              id="postContent"
+              class="post-text-textarea"
+              placeholder="What's on your mind? Share your code or thoughts..."
+            ></textarea>
+          </div>
+          <div class="creator-actions">
+            <div class="attachment-options">
+              <input
+                type="file"
+                id="postImageInp"
+                accept="image/*"
+                style="display: none"
+              />
+
+              <button
+                class="attach-btn"
+                title="Add Image"
+                onclick="document.getElementById('postImageInp').click()"
+              >
+                <i class="fas fa-image"></i>
+              </button>
+
+              <button class="attach-btn" title="Add Code" type="button">
+                <i class="fas fa-code"></i>
+              </button>
+            </div>
+            <button id="publish-post-btn" class="publish-btn">
+              <i class="fas fa-paper-plane"></i> Publish
+            </button>
+          </div>
+
+          <div
+            id="imagePreviewContainer"
+            style="
+              display: none;
+              margin-top: 10px;
+              position: relative;
+              max-width: 150px;
+            "
+          >
+            <img
+              id="imagePreview"
+              src=""
+              style="width: 100%; border-radius: 8px; border: 1px solid #e2e8f0"
+            />
+            <button
+              type="button"
+              onclick="clearImageSelection()"
+              style="
+                position: absolute;
+                top: -5px;
+                right: -5px;
+                background: #dc2626;
+                color: white;
+                border: none;
+                border-radius: 50%;
+                width: 20px;
+                height: 20px;
+                cursor: pointer;
+                font-size: 11px;
+              "
+            ></button>
+          </div>
+        </div>
+      </aside>
+
+      <main class="feed-right">
+        <h2 class="feed-title">Your Workspace Activity</h2>
+
+        <div id="loader">
+          <div class="spinner"></div>
+          <p>Syncing Workspace Stream...</p>
+        </div>
+
+        <div class="posts-list" id="postsContainer">
+          <div class="empty-feed-placeholder" id="emptyFeedState">
+            <div class="empty-icon-box"><i class="fas fa-newspaper"></i></div>
+            <h3>No stories published yet</h3>
+            <p>
+              Your timeline is fresh. Compose your first story on the left panel
+              to update your feed stream.
+            </p>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="module" src="dashboard.js"></script>
+  </body>
+</html>
